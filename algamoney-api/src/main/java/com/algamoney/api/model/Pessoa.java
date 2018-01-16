@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "pessoa")
+@DynamicUpdate
 public class Pessoa {
 	
 	@Id
