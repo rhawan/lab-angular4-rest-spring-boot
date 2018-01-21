@@ -29,6 +29,7 @@ public class Lancamento {
 	@NotNull
 	private String descricao;
 	
+	@NotNull
 	@Column(name = "data_vencimento")
 	private LocalDate dataVencimento;
 	
@@ -40,13 +41,16 @@ public class Lancamento {
 	
 	private String observacao;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
