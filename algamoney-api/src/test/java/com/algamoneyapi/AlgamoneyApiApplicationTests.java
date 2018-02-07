@@ -12,7 +12,6 @@ import com.algamoney.api.AlgamoneyApiApplication;
 @SpringBootTest(classes = AlgamoneyApiApplication.class)
 @Ignore
 public class AlgamoneyApiApplicationTests {
-	
 
 	@Test
 	public void contextLoads() {
