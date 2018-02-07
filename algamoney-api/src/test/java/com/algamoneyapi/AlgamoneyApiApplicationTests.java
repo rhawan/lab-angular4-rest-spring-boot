@@ -13,6 +13,7 @@ import com.algamoney.api.AlgamoneyApiApplication;
 @Ignore
 public class AlgamoneyApiApplicationTests {
 
+	
 	@Test
 	public void contextLoads() {
 	}
