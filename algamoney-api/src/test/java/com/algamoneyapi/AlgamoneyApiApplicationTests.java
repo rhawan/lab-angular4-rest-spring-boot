@@ -15,6 +15,7 @@ public class AlgamoneyApiApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }
