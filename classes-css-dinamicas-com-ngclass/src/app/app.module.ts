@@ -20,4 +20,3 @@ import { FuncionarioFormComponent } from './funcionario-form/funcionario-form.co
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-	
