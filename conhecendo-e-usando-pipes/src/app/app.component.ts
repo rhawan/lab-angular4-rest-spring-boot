@@ -6,12 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  funcionarios = [];
-
-  aoAdicionar(funcionario) {
-    this.funcionarios.push(funcionario);
-  }
-
-
+  nome = 'Rhawan Brenner';
+  dataAniversario = new Date(1992, 1, 25);
+  preco = 12855.32;
+  troco = 0.57392;
 }
