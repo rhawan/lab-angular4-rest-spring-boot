@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 class Cliente {
   nome: string;
   email: string;
-  profissao: string;
+  profissao: '';
 }
 
 @Component({
@@ -19,11 +19,7 @@ export class AppComponent {
   profissoes = ['Programador', 'Empresário', 'Outra'];
 
   salvar(form: NgForm) {
-    //this.cliente.nome = form.value.nome;
-    //this.cliente.email = form.value.email;
-    //this.cliente.profissao = form.value.profissao;
-
     console.log(form);
-    //console.log(this.cliente);
+    form.reset({ profissao: ''});
   }
 }
