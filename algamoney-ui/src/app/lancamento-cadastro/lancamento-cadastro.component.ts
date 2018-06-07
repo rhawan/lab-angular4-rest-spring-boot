@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class LancamentoCadastroComponent implements OnInit {
 
   pt_BR: any;
+  tipos;
+  categorias;
+  pessoas;
 
   constructor() { }
 
@@ -21,6 +24,23 @@ export class LancamentoCadastroComponent implements OnInit {
         'Outubro', 'Novembro', 'Dezembro' ],
       monthNamesShort: [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ]
     };
+
+    this.tipos = [
+      { label: 'Receita', value: 'RECEITA' },
+      { label: 'Despesa', value: 'DESPESA' }
+    ];
+
+    this.categorias = [
+      { label: 'Alimentação', value: 1 },
+      { label: 'Transporte', value: 2 }
+    ];
+
+    this.pessoas = [
+      { label: 'João da Silva', value: 1 },
+      { label: 'Sebastião Souza', value: 2 },
+      { label: 'Maria Abadia', value: 3 }
+    ];
+
   }
 
 }

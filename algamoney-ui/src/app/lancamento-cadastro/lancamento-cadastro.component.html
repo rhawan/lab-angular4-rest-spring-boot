@@ -1,9 +1,13 @@
 <div class="container">
-  <form>
+  <form autocomplete="false">
 
   <div class="ui-g">
     <div class="ui-g-12">
       <h1>Novo Lançamento</h1>
+    </div>
+
+    <div class="ui-g-12">
+      <p-selectButton [options]="tipos" #tipoLancamento></p-selectButton>
     </div>
 
     <div class="ui-g-6 ui-md-3 ui-fluid">
@@ -13,28 +17,44 @@
     </div>
 
     <div class="ui-g-6 ui-md-3 ui-fluid">
-      <label>Recebimento</label>
+      <label>{{ tipoLancamento.value == 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
       <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
     </div>
 
     <div class="ui-g-12 ui-md-9 ui-fluid">
       <label>Descrição</label>
-      <input pInputText type="text">
+      <input pInputText type="text" name="descricao"
+        ngModel #descricao="ngModel" required minlength="5">
+
+        <app-message [control]="descricao" error="required"
+          text="Informe uma descrição"></app-message>
+
+        <div *ngIf="descricao.hasError('required') && descricao.touched"
+          class="ui-message ui-messages-error">
+          Informe uma descrição
+        </div>
+
+        <div *ngIf="descricao.hasError('minlength') && descricao.touched"
+          class="ui-message ui-messages-error">
+          Mínimo de {{ descricao.errors.minlength.requiredLength }} caracteres
+        </div>
     </div>
 
     <div class="ui-g-12 ui-md-3 ui-fluid">
       <label>Valor</label>
-      <input pInputText type="text" placeholder="0,00">
+      <p-inputMask mask="999999999,99" slotChar="" placeholder="0,00"></p-inputMask>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label>Categoria</label>
-      <input pInputText type="text">
+      <p-dropdown [options]="categorias" [autoWidth]="false"
+        placeholder="Selecione"></p-dropdown>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label>Pessoa</label>
-      <input pInputText type="text">
+      <p-dropdown [options]="pessoas" [autoWidth]="false"
+        placeholder="Selecione" [filter]="true"></p-dropdown>
     </div>
 
     <div class="ui-g-12 ui-fluid">
