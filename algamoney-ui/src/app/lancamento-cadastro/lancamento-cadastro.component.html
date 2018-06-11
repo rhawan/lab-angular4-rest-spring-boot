@@ -13,12 +13,17 @@
     <div class="ui-g-6 ui-md-3 ui-fluid">
       <label>Vencimento</label>
       <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"
-        [locale]="pt_BR"></p-calendar>
+        [locale]="pt_BR" name="dataVencimento" required
+        ngModel #dataVencimento="ngModel"></p-calendar>
+
+      <app-message [control]="dataVencimento" error="required"
+        text="Informe uma data de vencimento"></app-message>
     </div>
 
     <div class="ui-g-6 ui-md-3 ui-fluid">
       <label>{{ tipoLancamento.value == 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+      <p-calendar dateFormat="dd/mm/yy" [showIcon]="true"
+        name="dataLancamento" ngModel></p-calendar>
     </div>
 
     <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -35,24 +40,31 @@
 
     <div class="ui-g-12 ui-md-3 ui-fluid">
       <label>Valor</label>
-      <p-inputMask mask="999999999,99" slotChar="" placeholder="0,00"></p-inputMask>
+      <p-inputMask mask="999999999,99" slotChar="" placeholder="0,00"
+        name="valor" ngModel required #valor="ngModel"></p-inputMask>
+
+      <app-message [control]="valor" error="required"
+          text="Informe um valor"></app-message>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label>Categoria</label>
       <p-dropdown [options]="categorias" [autoWidth]="false"
-        placeholder="Selecione"></p-dropdown>
+        placeholder="Selecione" name="categoria"
+        ngModel required></p-dropdown>
     </div>
 
     <div class="ui-g-12 ui-md-6 ui-fluid">
       <label>Pessoa</label>
       <p-dropdown [options]="pessoas" [autoWidth]="false"
-        placeholder="Selecione" [filter]="true"></p-dropdown>
+        placeholder="Selecione" [filter]="true"
+        name="pessoa" ngModel required></p-dropdown>
     </div>
 
     <div class="ui-g-12 ui-fluid">
       <label>Observação</label>
-      <textarea pInputTextarea rows="3"></textarea>
+      <textarea pInputTextarea rows="3"
+        name="observacao" ngModel></textarea>
     </div>
 
     <div class="ui-g-12">
