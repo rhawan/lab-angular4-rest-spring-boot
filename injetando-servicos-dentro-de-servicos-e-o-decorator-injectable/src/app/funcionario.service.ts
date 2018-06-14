@@ -1,10 +1,18 @@
+import { Injectable } from '@angular/core';
+
+import { LogService } from './log.service';
+
+@Injectable()
 export class FuncionarioService {
 
   ultimoId = 1;
   funcionarios = [{ id: 1, nome: 'João' }];
 
+  constructor(private logService: LogService) { }
 
   adicionar(nome) {
+    this.logService.log(`Adicionando nome ${nome}...`);
+
     const funcionario = {
       id: ++this.ultimoId,
       nome: nome
@@ -17,11 +25,4 @@ export class FuncionarioService {
     return this.funcionarios;
   }
 
-}
-
-export class FuncionarioAbreviadoService extends FuncionarioService {
-
-  adicionar(nome: string) {
-    super.adicionar(nome.substr(0, 3) + '...');
-  }
 }

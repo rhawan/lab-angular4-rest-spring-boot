@@ -8,6 +8,10 @@ import { FuncionarioCardComponent } from './funcionario-card/funcionario-card.co
 import { FuncionarioFormComponent } from './funcionario-form/funcionario-form.component';
 import { CampoColoridoDirective } from './campo-colorido.directive';
 
+const criarFuncionarioService = () => {
+  return new FuncionarioAbreviadoService(2);
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,7 @@ import { CampoColoridoDirective } from './campo-colorido.directive';
   // Esta implementacao equivale a 2 implementacao
   // providers: [FuncionarioService],
   providers: [
-    { provide: FuncionarioService, useClass: FuncionarioAbreviadoService }
+    { provide: FuncionarioService, useFactory: criarFuncionarioService }
   ],
   bootstrap: [AppComponent]
 })
