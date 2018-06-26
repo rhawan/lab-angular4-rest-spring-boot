@@ -10,15 +10,17 @@
       <div class="ui-g-12  ui-fluid">
         <label>Descrição</label>
         <input pInputText type="text" name="descricao"
-          [(ngModel)]="descricao">
+          [(ngModel)]="filtro.descricao">
       </div>
 
       <div class="ui-g-12">
         <label style="display: block">Vencimento</label>
-        <input pInputText type="text" style="width: 95px">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="dataVencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio"></p-calendar>
 
         <label>até</label>
-        <input pInputText type="text" style="width: 95px">
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width: '95px' }"
+          name="dataVencimentoFim" [(ngModel)]="filtro.dataVencimentoFim"></p-calendar>
       </div>
 
       <div class="ui-g-12">
@@ -29,7 +31,39 @@
 
       <div class="ui-g">
         <div class="ui-g-12">
-          <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+          <p-table [value]="lancamentos" [responsive]="true"
+          [paginator]="true" [rows]="filtro.itensPorPagina"
+          [lazy]="true" (onLazyLoad)="aoMudarPagina($event)"
+          [totalRecords]="totalRegistros" [loading]="loading">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Pessoa</th>
+                    <th>Descrição</th>
+                    <th>Vencimento</th>
+                    <th>Pagamento</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-lancamento>
+                <tr>
+                    <td>{{lancamento.pessoa}}</td>
+                    <td>{{lancamento.descricao}}</td>
+                    <td class="col-data">{{lancamento.dataVencimento | date:'dd/MM/yyyy'}}</td>
+                    <td class="col-data">{{lancamento.dataPagamento | date:'dd/MM/yyyy'}}</td>
+                    <td class="col-valor">
+                      <span [ngStyle]="{color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">{{lancamento.valor | number:'1.2-2'}}</span>
+                    </td>
+                    <td class="col-acoes">
+                      <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 10px"></a>
+                      <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              Nenhum lançamento encontrado
+            </ng-template>
+        </p-table>
       </div>
 
       <div class="ui-g-12">
