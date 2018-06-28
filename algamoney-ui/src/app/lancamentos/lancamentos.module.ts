@@ -11,6 +11,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputMaskModule} from 'primeng/inputmask';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 import { SharedModule } from './../shared/shared.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -40,6 +41,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
   exports: [
     LancamentoCadastroComponent,
     LancamentosPesquisaComponent
-  ]
+  ],
+  providers: [MessageService]
 })
 export class LancamentosModule { }
