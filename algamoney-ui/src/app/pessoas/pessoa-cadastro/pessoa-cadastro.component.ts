@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+import { MessageService } from 'primeng/components/common/messageservice';
+
+import { ErrorHandlerService } from './../../core/error-handler.service';
+import { PessoaService } from './../pessoa.service';
+import { Pessoa } from './../../core/model';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -9,8 +16,13 @@ export class PessoaCadastroComponent implements OnInit {
 
   cidades;
   estados;
+  pessoa = new Pessoa();
 
-  constructor() { }
+  constructor(
+    private pessoaService: PessoaService,
+    private messageService: MessageService,
+    private errorHandler: ErrorHandlerService
+  ) { }
 
   ngOnInit() {
     this.cidades = [
@@ -24,6 +36,17 @@ export class PessoaCadastroComponent implements OnInit {
       { label: 'SP', value: 'SP' },
       { label: 'RJ', value: 'RJ' }
     ];
+  }
+
+  salvar(form: FormControl) {
+    this.pessoaService.salvar(this.pessoa)
+    .then(() => {
+      this.messageService.add({severity: 'success', summary: 'Pessoa adicionada com sucesso!'});
+
+      form.reset();
+      this.pessoa = new Pessoa();
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

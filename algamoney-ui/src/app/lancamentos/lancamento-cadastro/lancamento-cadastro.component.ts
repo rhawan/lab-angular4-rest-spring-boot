@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+import { MessageService } from 'primeng/components/common/messageservice';
+
+import { Lancamento } from './../../core/model';
+import { LancamentoService } from './../lancamento.service';
+import { CategoriaService } from './../../categorias/categoria.service';
+import { PessoaService } from './../../pessoas/pessoa.service';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -9,10 +18,17 @@ export class LancamentoCadastroComponent implements OnInit {
 
   pt_BR: any;
   tipos;
-  categorias;
-  pessoas;
+  categorias = [];
+  pessoas = [];
+  lancamento = new Lancamento();
 
-  constructor() { }
+  constructor(
+    private categoriaService: CategoriaService,
+    private pessoaService: PessoaService,
+    private lancamentoService: LancamentoService,
+    private errorHandler: ErrorHandlerService,
+    private messageService: MessageService,
+  ) { }
 
   ngOnInit() {
     this.pt_BR = {
@@ -30,17 +46,41 @@ export class LancamentoCadastroComponent implements OnInit {
       { label: 'Despesa', value: 'DESPESA' }
     ];
 
-    this.categorias = [
-      { label: 'Alimentação', value: 1 },
-      { label: 'Transporte', value: 2 }
-    ];
+    this.carregarCategorias();
+    this.carregarPessoas();
+  }
 
-    this.pessoas = [
-      { label: 'João da Silva', value: 1 },
-      { label: 'Sebastião Souza', value: 2 },
-      { label: 'Maria Abadia', value: 3 }
-    ];
+  salvar(form: FormControl) {
+    this.lancamentoService.salvar(this.lancamento)
+    .then(() => {
+      this.messageService.add({severity: 'success', summary: 'Lançamento adicionado com sucesso!'});
 
+      form.reset();
+      this.lancamento = new Lancamento();
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarCategorias() {
+    return this.categoriaService.listarTodas()
+    .then(categorias => {
+      this.categorias = categorias.map(c => {
+        return {label: `${c.codigo} - ${c.nome}`,
+                value: c.codigo};
+      });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarPessoas() {
+    return this.pessoaService.listarTodas()
+    .then(pessoas => {
+      this.pessoas = pessoas.map(p => {
+        return {label: `${p.codigo} - ${p.nome}`,
+                value: p.codigo};
+      });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

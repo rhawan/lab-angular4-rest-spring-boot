@@ -43,6 +43,10 @@ export class LancamentosPesquisaComponent implements OnInit {
       this.totalRegistros = resultado.total;
       this.lancamentos = resultado.lancamentos;
       this.loading = false;
+
+      if (pagina === 0) {
+        this.tabela.first = 0;
+      }
     })
     .catch(erro => this.errorHandler.handle(erro));
   }

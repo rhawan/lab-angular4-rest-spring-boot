@@ -10,8 +10,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {DropdownModule} from 'primeng/dropdown';
-import {InputMaskModule} from 'primeng/inputmask';
 import { MessageService } from 'primeng/components/common/messageservice';
+
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { SharedModule } from './../shared/shared.module';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -30,7 +31,8 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    InputMaskModule,
+
+    CurrencyMaskModule,
 
     SharedModule
   ],

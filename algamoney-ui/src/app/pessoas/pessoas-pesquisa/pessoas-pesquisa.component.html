@@ -39,7 +39,8 @@
                     <td>{{pessoa.nome}}</td>
                     <td>{{pessoa.endereco.cidade}}</td>
                     <td>{{pessoa.endereco.estado}}</td>
-                    <td><a href="#" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
+                    <td><a href="#" [pTooltip]="pessoa.ativo ? 'Desativar' : 'Ativar'"
+                      (click)="alterarStatus(pessoa)">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a></td>
                     <td class="col-acoes">
                       <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top" style="margin-right: 10px"></a>
                       <button pButton icon="fa-trash" pTooltip="Excluir"
