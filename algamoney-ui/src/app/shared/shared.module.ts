@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {GrowlModule} from 'primeng/growl';
-
 import { MessageComponent } from './message/message.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    GrowlModule
+    CommonModule
   ],
   declarations: [MessageComponent],
-  exports: [MessageComponent, GrowlModule]
+  exports: [MessageComponent]
 })
 export class SharedModule { }

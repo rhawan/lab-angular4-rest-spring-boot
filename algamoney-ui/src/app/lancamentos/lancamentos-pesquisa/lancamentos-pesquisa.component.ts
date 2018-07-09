@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -23,10 +24,12 @@ export class LancamentosPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private title: Title
   ) {}
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de Lançamentos');
   }
 
   aoMudarPagina(event: LazyLoadEvent) {

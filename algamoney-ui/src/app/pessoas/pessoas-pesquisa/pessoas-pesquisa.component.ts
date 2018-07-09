@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 import { MessageService } from 'primeng/components/common/messageservice';
@@ -11,7 +12,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisaComponent {
+export class PessoasPesquisaComponent implements OnInit {
 
   totalRegistros = 0;
   loading: boolean;
@@ -23,8 +24,13 @@ export class PessoasPesquisaComponent {
     private pessoaService: PessoaService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private title: Title
   ) {}
+
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de Pessoas');
+  }
 
   aoMudarPagina(event: LazyLoadEvent) {
     this.loading = true;

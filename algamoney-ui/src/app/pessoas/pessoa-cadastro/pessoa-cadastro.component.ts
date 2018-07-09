@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { MessageService } from 'primeng/components/common/messageservice';
 
@@ -21,10 +22,13 @@ export class PessoaCadastroComponent implements OnInit {
   constructor(
     private pessoaService: PessoaService,
     private messageService: MessageService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Cadastro de Pessoas');
+
     this.cidades = [
       { label: 'Goiânia', value: 'GOIANIA' },
       { label: 'São Paulo', value: 'SAO_PAULO' },
