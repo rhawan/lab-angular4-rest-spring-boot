@@ -1,3 +1,4 @@
+import { PessoasRoutingModule } from './pessoas-routing.module';
 import { RouterModule } from '@angular/router';
 import { GrowlModule } from 'primeng/growl';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,8 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     InputMaskModule,
     DropdownModule,
 
-    SharedModule
+    SharedModule,
+    PessoasRoutingModule
   ],
   declarations: [
     PessoaCadastroComponent,
