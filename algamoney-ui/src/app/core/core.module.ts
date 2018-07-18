@@ -3,6 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/components/common/api';
@@ -17,6 +18,7 @@ registerLocaleData(localePt, 'pt-BR');
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
 
     ConfirmDialogModule,
     GrowlModule

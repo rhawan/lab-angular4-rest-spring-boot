@@ -55,7 +55,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     const codigoLancamento = this.route.snapshot.params['codigo'];
     if (codigoLancamento) {
-      this.carregarLancamento(codigoLancamento);
+     this.carregarLancamento(codigoLancamento);
     }
 
     this.carregarCategorias();
