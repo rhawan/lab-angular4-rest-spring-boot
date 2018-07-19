@@ -1,9 +1,10 @@
 import { Injectable, Input } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
 
 import { Lancamento } from './../core/model';
+import { MoneyHttp } from '../seguranca/money-http';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -20,7 +21,7 @@ export class LancamentoService {
 
   lancamentosUrl = 'http://localhost:8080/lancamentos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: MoneyHttp) { }
 
   pesquisar(filtro: LancamentoFiltro) {
     let params = new HttpParams({

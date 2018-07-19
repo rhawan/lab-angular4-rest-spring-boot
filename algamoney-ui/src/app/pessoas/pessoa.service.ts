@@ -1,7 +1,8 @@
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Pessoa } from './../core/model';
+import { MoneyHttp } from './../seguranca/money-http';
 
 export class PessoaFiltro {
   nome: string;
@@ -16,7 +17,7 @@ export class PessoaService {
 
   pessoasUrl = 'http://localhost:8080/pessoas';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: MoneyHttp) { }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     let params = new HttpParams({

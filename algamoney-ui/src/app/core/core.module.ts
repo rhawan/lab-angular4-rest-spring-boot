@@ -10,6 +10,7 @@ import { ConfirmationService } from 'primeng/components/common/api';
 import {GrowlModule} from 'primeng/growl';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { MoneyHttp } from './../seguranca/money-http';
 
 // E por fim, registre o localePt como 'pt-BR'
 registerLocaleData(localePt, 'pt-BR');
@@ -26,6 +27,8 @@ registerLocaleData(localePt, 'pt-BR');
   declarations: [NavbarComponent],
   providers: [
     ConfirmationService,
+
+    MoneyHttp,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   exports: [
