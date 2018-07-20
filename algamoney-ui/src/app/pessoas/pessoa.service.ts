@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -15,9 +16,11 @@ export class PessoaFiltro {
 })
 export class PessoaService {
 
-  pessoasUrl = 'http://localhost:8080/pessoas';
+  pessoasUrl: string;
 
-  constructor(private http: MoneyHttp) { }
+  constructor(private http: MoneyHttp) {
+    this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+   }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
     let params = new HttpParams({

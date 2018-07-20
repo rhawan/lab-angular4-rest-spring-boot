@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable, Input } from '@angular/core';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -19,9 +20,11 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl: string;
 
-  constructor(private http: MoneyHttp) { }
+  constructor(private http: MoneyHttp) {
+    this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
+   }
 
   pesquisar(filtro: LancamentoFiltro) {
     let params = new HttpParams({

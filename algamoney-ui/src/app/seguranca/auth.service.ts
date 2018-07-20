@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  oauthTokenUrl = 'http://localhost:8080/oauth/token';
+  oauthTokenUrl: string;
 
   jwtPayload: any;
 
@@ -17,6 +18,7 @@ export class AuthService {
     private jwtHelper: JwtHelperService
   ) {
     this.carregarToken();
+    this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
    }
 
   login(usuario: string, senha: string): Promise<void> {
@@ -84,6 +86,11 @@ export class AuthService {
   isAccessTokenInvalido() {
     const token = localStorage.getItem('token');
     return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
   private armazenarToken(token: string) {
