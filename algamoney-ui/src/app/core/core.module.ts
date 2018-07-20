@@ -9,6 +9,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/components/common/api';
 import {GrowlModule} from 'primeng/growl';
 
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MoneyHttp } from './../seguranca/money-http';
 
@@ -24,7 +25,10 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmDialogModule,
     GrowlModule
   ],
-  declarations: [NavbarComponent],
+  declarations: [
+    NavbarComponent,
+    NaoAutorizadoComponent
+  ],
   providers: [
     ConfirmationService,
 

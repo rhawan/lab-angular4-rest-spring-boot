@@ -60,7 +60,8 @@
                       style="margin-right: 10px"
                       [routerLink]="['/lancamentos', lancamento.codigo]"></a>
                       <button pButton icon="fa-trash" pTooltip="Excluir"
-                        tooltipPosition="top" (click)="confirmarExclusao(lancamento)"></button>
+                        tooltipPosition="top" (click)="confirmarExclusao(lancamento)"
+                        [disabled]="!auth.temPermissao('ROLE_REMOVER_LANCAMENTO')"></button>
                     </td>
                 </tr>
             </ng-template>
