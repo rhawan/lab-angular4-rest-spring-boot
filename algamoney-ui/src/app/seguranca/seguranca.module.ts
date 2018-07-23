@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import {InputTextModule} from 'primeng/components/inputtext/inputtext';
@@ -22,8 +23,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: [ 'localhost:8080' ],
-        blacklistedRoutes: ['/oauth/token/']
+        whitelistedDomains: environment.tokenWhitelistedDomains,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes
       }
     }),
 
