@@ -1,17 +1,23 @@
 package com.algamoney.api.mail;
 
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import com.algamoney.api.model.Lancamento;
+import com.algamoney.api.model.Usuario;
 
 @Component
 public class Mailer {
@@ -19,13 +25,49 @@ public class Mailer {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private TemplateEngine thymeleaf;
+	
+	/*@Autowired
+	private LancamentoRepository repo;
+	
 	@EventListener
 	private void teste(ApplicationReadyEvent event) {
-		enviarEmail("testes.algaworks@gmail.com", Arrays.asList("rhawan.franco@maximasistemas.com.br"), "Testanto", "Olá!<br/>Teste ok.");
+		String template = "mail/aviso-lancamentos-vencidos";
+		
+		List<Lancamento> lista = repo.findAll();
+		Map<String, Object> variaveis = new HashMap<>();
+		variaveis.put("lancamentos", lista);
+		
+		enviarEmail("testes.algaworks@gmail.com", Arrays.asList("rhawan.franco@maximasistemas.com.br"), "Testanto", template, variaveis);
+		
 		System.out.println("#### Email enviado ####");
+	}*/
+	
+	public void avisarSobreLancamentosVencidos(
+			List<Lancamento> vencidos, List<Usuario> destinatarios) {
+		Map<String, Object> variaveis = new HashMap<>();
+		variaveis.put("lancamentos", vencidos);
+		
+		List<String> emails = destinatarios.stream().map(u -> u.getEmail())
+				.collect(Collectors.toList());
+		
+		this.enviarEmail("testes.algaworks@gmail.com", emails, "Lançamentos vencidos", "mail/aviso-lancamentos-vencidos", variaveis);
+		
 	}
 	
-	public void enviarEmail(String remetente,
+	private void enviarEmail(String remetente,
+			List<String> destinatarios, String assunto,
+			String template, Map<String, Object> variaveis) {
+		Context context = new Context(new Locale("pt", "BR"));
+		
+		variaveis.entrySet().forEach(e -> context.setVariable(e.getKey(), e.getValue()));
+		
+		String mensagem = thymeleaf.process(template, context);
+		this.enviarEmail(remetente, destinatarios, assunto, mensagem);
+	}
+	
+	private void enviarEmail(String remetente,
 			List<String> destinatarios, String assunto, String mensagem) {
 		try {
 			MimeMessage mimeMessage = mailSender.createMimeMessage();

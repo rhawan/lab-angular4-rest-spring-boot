@@ -8,6 +8,7 @@ public class AlgamoneyApiProperty {
 	private String originPermitida = "http://localhost:8000";
 	private final Seguranca seguranca = new Seguranca();
 	private final Mail mail = new Mail();
+	private final AmazonS3 s3 = new AmazonS3();
 	
 	public Seguranca getSeguranca() {
 		return seguranca;
@@ -23,6 +24,10 @@ public class AlgamoneyApiProperty {
 	
 	public Mail getMail() {
 		return mail;
+	}
+	
+	public AmazonS3 getS3() {
+		return s3;
 	}
 
 	public static class Seguranca {
@@ -76,6 +81,39 @@ public class AlgamoneyApiProperty {
 
 		public void setPassword(String password) {
 			this.password = password;
+		}
+		
+	}
+	
+	public static class AmazonS3 {
+		private String accessKeyId;
+		
+		private String secretAccessKey;
+		
+		private String bucket;
+
+		public String getAccessKeyId() {
+			return accessKeyId;
+		}
+
+		public void setAccessKeyId(String accessKeyId) {
+			this.accessKeyId = accessKeyId;
+		}
+
+		public String getSecretAccessKey() {
+			return secretAccessKey;
+		}
+
+		public void setSecretAccessKey(String secretAccessKey) {
+			this.secretAccessKey = secretAccessKey;
+		}
+
+		public String getBucket() {
+			return bucket;
+		}
+
+		public void setBucket(String bucket) {
+			this.bucket = bucket;
 		}
 		
 	}
