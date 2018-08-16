@@ -2,7 +2,7 @@ import { environment } from './../../environments/environment';
 import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Pessoa } from './../core/model';
+import { Pessoa, Estado, Cidade } from './../core/model';
 import { MoneyHttp } from './../seguranca/money-http';
 
 export class PessoaFiltro {
@@ -17,9 +17,13 @@ export class PessoaFiltro {
 export class PessoaService {
 
   pessoasUrl: string;
+  estadosUrl: string;
+  cidadesUrl: string;
 
   constructor(private http: MoneyHttp) {
     this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+    this.estadosUrl = `${environment.apiUrl}/estados`;
+    this.cidadesUrl = `${environment.apiUrl}/cidades`;
    }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
@@ -99,6 +103,19 @@ export class PessoaService {
       const pessoa = response;
       return pessoa;
     });
+  }
+
+  listarEstados(): Promise<Estado[]> {
+    return this.http.get<Estado[]>(this.estadosUrl)
+    .toPromise();
+  }
+
+  pesquisarCidades(estado): Promise<Cidade[]> {
+    const params = new HttpParams()
+      .append('codigoEstado', estado);
+    return this.http.get<Cidade[]>(this.cidadesUrl, {
+      params
+    }).toPromise();
   }
 
 }
